@@ -1,31 +1,37 @@
+'use client'
 import React from "react";
-import { IoReorderThreeOutline } from "react-icons/io5";
-import { BsBell } from "react-icons/bs";
-import { FiEdit } from "react-icons/fi";
-
+import Header from "./components/Header";
+import { CiSearch } from "react-icons/ci";
+import { SessionProvider } from "next-auth/react";
 const HomePage = () => {
   return (
     <div className="flex h-screen w-full flex-col">
-      <header className="h-20 bg-white w-full flex flex-row justify-around items-center border border-grey-200">
-        <div>
-          <IoReorderThreeOutline className="text-2xl text-grey-400" />
-        </div>
-        <div className="text-thin text-xl">Ultimate Blog</div>
-        <div className="flex items-center space-x-2">
-          <div>
-            <BsBell className="text-2xl text-grey-400" />
+      <SessionProvider>
+        <Header />
+      </SessionProvider>
+      <div className="grid grid-cols-12 place-items-center w-full h-full">
+        <main className="col-span-8 w-full h-full border-r border-grey-300">
+          <div className="flex flex-col space-y-4">
+            <div className="flex items-center space-x-4">
+              <label htmlFor="search" className="relative">
+                <CiSearch className="absolute top-1/2 left-1 translate-y-[-50%] text-xl text-gray-500" />
+                <input
+                  type="text"
+                  name="search"
+                  id="search"
+                  className="outline-none border-grey-300 border p-2 boreder rounded-xl pl-6 w-[24rem]"
+                  placeholder="Search for anything..."
+                />
+              </label>
+              <div className="flex">
+                <div>My topic:</div>
+                <div>all tags are here</div>
+              </div>
+            </div>
           </div>
-          <div className="h-10 w-10 rounded-full bg-gray-300"></div>
-          <div>
-            <button className="flex transition hover:border-gray-900 hover:text-gray-900
-             items-center px-4 py-2.5 space-x-2.5 border border-grey-200 rounded-xl py-2.5 text-gray-600">
-              <div>Write</div>
-              <div><FiEdit /></div>
-            </button>
-          </div>
-        </div>
-      </header>
-      <div className="grid grid-cols-12"></div>
+        </main>
+        <aside className="col-span-4 w-full h-full"> aside</aside>
+      </div>
     </div>
   );
 }
